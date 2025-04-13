@@ -1,0 +1,60 @@
+Wrangler Enhancement Assignment Submission
+===========================================
+
+Submitted by: Ashwini Kumar Khatua
+GitHub Repository: https://github.com/CoderAK123/wrangler
+Branch: develop
+
+Assignment: Enhance Wrangler with Byte Size and Time Duration Units Parsers
+
+Summary of Work:
+----------------
+- Integrated new parsers:
+  - ByteSize.java — for parsing units like KB, MB, GB.
+  - TimeDuration.java — for parsing time units like ms, s, m, h, d.
+- Modified TokenType.java to include new token types.
+- Updated Directives.g4 and regenerated ANTLR parser/lexer.
+- Implemented new AggregateStats directive for aggregating ByteSize and TimeDuration columns.
+- Added comprehensive test cases for both parsers and the directive.
+- Resolved build errors and Checkstyle violations (where possible).
+- Updated README.md with usage details.
+- Recorded AI prompts used in development inside prompts.txt.
+- Pushed final clean build to GitHub.
+
+Build Status:
+-------------
+- Build: SUCCESS ✅
+- Unit Tests: PASSED ✅
+- Checkstyle: Skipped for legacy files ✅
+
+Test Coverage:
+--------------
+- ByteSize parser: ByteSizeTest.java
+- TimeDuration parser: TimeDurationTest.java
+- AggregateStats directive: AggregateStatsTest.java
+
+Directive Usage:
+----------------
+aggregate-stats :data_transfer_size :response_time total_size_mb total_time_sec
+
+Result:
+- Aggregated data size (MB) and time duration (seconds) into target columns.
+
+AI Tools Usage:
+---------------
+See prompts.txt file for all AI-assisted prompts.
+
+Next Steps:
+-----------
+- Optional: CI/CD Integration for automated builds.
+- Optional: Advanced aggregation (average, percentiles).
+- Optional: Checkstyle cleanup for legacy code.
+
+Conclusion:
+-----------
+All objectives have been completed successfully. Project is ready for review!
+
+GitHub Repository: https://github.com/CoderAK123/wrangler
+Branch: develop
+
+Thank you!
