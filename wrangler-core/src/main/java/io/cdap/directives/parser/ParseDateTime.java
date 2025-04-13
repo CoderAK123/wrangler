@@ -90,8 +90,8 @@ public class ParseDateTime implements Directive, Lineage {
         LocalDateTime localDateTime = LocalDateTime.parse(value.toString(), formatter);
         row.setValue(idx, localDateTime);
       } catch (DateTimeParseException exception) {
-        throw new ErrorRowException(NAME, String.format("Value %s for column %s is not in expected format %s",
-                                                        value.toString(), column, format), 2, exception);
+        throw new ErrorRowException(NAME + ": " + String.format("Value %s for column %s is not in expected format %s",
+                                                        value.toString(), column, format), 2, false, exception);
       }
     }
     return rows;

@@ -87,16 +87,18 @@ public class FormatDateTime implements Directive, Lineage {
       }
 
       if (!(value instanceof LocalDateTime)) {
-        throw new ErrorRowException(NAME, String.format("Value %s for column %s expected to be datetime but found %s",
-                                                        value.toString(), column, value.getClass().getSimpleName()), 2);
+        throw new ErrorRowException(
+            NAME + ": " + String.format("Value %s for column %s expected to be datetime but found %s",
+            value.toString(), column, value.getClass().getSimpleName()), 2, false);
       }
 
       try {
         LocalDateTime localDateTime = (LocalDateTime) value;
         row.setValue(idx, localDateTime.format(formatter));
       } catch (DateTimeException exception) {
-        throw new ErrorRowException(NAME, String.format("Error converting datetime %s to string with format %s",
-                                                        value.toString(), format), 2, exception);
+        throw new ErrorRowException(
+            NAME + ": " + String.format("Error converting datetime %s to string with format %s",
+            value.toString(), format), 2, false, exception);
       }
     }
     return rows;

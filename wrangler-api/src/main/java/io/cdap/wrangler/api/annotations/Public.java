@@ -30,7 +30,6 @@ import java.lang.annotation.Target;
  */
 @Documented
 @Target(ElementType.TYPE)
-@Public
 public @interface Public {
 
 }

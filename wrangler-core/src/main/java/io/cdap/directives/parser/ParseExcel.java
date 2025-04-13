@@ -212,7 +212,7 @@ public class ParseExcel implements Directive, Lineage {
         }
       }
     } catch (Exception e) {
-      throw new ErrorRowException(NAME, e.getMessage(), 1);
+      throw new ErrorRowException(NAME + ": " + e.getMessage(), 1);
     } finally {
       if (input != null) {
         Closeables.closeQuietly(input);

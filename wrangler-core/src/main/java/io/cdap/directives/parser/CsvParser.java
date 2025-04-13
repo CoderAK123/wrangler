@@ -158,7 +158,7 @@ public class CsvParser implements Directive, Lineage {
         }
       } catch (IOException e) {
         // When there is error parsing data, the data is written to error.
-        throw new ErrorRowException(NAME, e.getMessage(), 1);
+        throw new ErrorRowException(NAME + ": " + e.getMessage(), 1, false);
       }
     }
     return rows;

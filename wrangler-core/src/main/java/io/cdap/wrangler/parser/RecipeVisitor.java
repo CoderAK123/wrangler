@@ -22,6 +22,7 @@ import io.cdap.wrangler.api.SourceInfo;
 import io.cdap.wrangler.api.Triplet;
 import io.cdap.wrangler.api.parser.Bool;
 import io.cdap.wrangler.api.parser.BoolList;
+import io.cdap.wrangler.api.parser.ByteSize;
 import io.cdap.wrangler.api.parser.ColumnName;
 import io.cdap.wrangler.api.parser.ColumnNameList;
 import io.cdap.wrangler.api.parser.DirectiveName;
@@ -33,7 +34,9 @@ import io.cdap.wrangler.api.parser.Properties;
 import io.cdap.wrangler.api.parser.Ranges;
 import io.cdap.wrangler.api.parser.Text;
 import io.cdap.wrangler.api.parser.TextList;
+import io.cdap.wrangler.api.parser.TimeDuration;
 import io.cdap.wrangler.api.parser.Token;
+//import io.cdap.wrangler.api.parser.TokenType;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.Interval;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -326,4 +329,21 @@ public final class RecipeVisitor extends DirectivesBaseVisitor<RecipeSymbol.Buil
     int column = ctx.getStart().getCharPositionInLine();
     return new SourceInfo(lineno, column, text);
   }
+  @Override
+  public RecipeSymbol.Builder visitByteSizeArg(DirectivesParser.ByteSizeArgContext ctx) {
+    ByteSize byteSize = new ByteSize(ctx.getText());
+    builder.addToken(byteSize);
+    return builder;
+  }
+
+  @Override
+  public RecipeSymbol.Builder visitTimeDurationArg(DirectivesParser.TimeDurationArgContext ctx) {
+    TimeDuration timeDuration = new TimeDuration(ctx.getText());
+    builder.addToken(timeDuration);
+    return builder;
+  }
+
 }
+
+
+

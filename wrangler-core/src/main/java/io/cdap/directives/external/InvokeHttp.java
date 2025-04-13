@@ -140,7 +140,7 @@ public class InvokeHttp implements Directive, Lineage {
         }
       } catch (Exception e) {
         // If there are any issues, they will be pushed on the error port.
-        throw new ErrorRowException(NAME, e.getMessage(), 500);
+        throw new ErrorRowException(NAME + ": " + e.getMessage(), 500);
       }
     }
     return rows;

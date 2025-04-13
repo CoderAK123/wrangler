@@ -216,3 +216,47 @@ Cask is a trademark of Cask Data, Inc. All rights reserved.
 
 Apache, Apache HBase, and HBase are trademarks of The Apache Software Foundation. Used with
 permission. No endorsement by The Apache Software Foundation is implied by the use of these marks.
+
+
+## Enhancements: ByteSize and TimeDuration Parsers with AggregateStats Directive
+
+### New Token Parsers
+- **ByteSize**: Parses data size values like `10KB`, `5MB`, `1.5GB`, etc.
+- **TimeDuration**: Parses time duration values like `150ms`, `2s`, `3m`, `1h`, `1d`.
+
+### Usage in Recipes
+You can now use these tokens in directives that accept size or duration.
+
+### New Directive: `aggregate-stats`
+Aggregates byte size and time duration columns.
+
+**Usage:**
+```plaintext
+aggregate-stats :data_transfer_size :response_time total_size_mb total_time_sec
+Arguments:
+
+Source Byte Size Column (e.g., :data_transfer_size)
+
+Source Time Duration Column (e.g., :response_time)
+
+Target Column for Total Size (e.g., total_size_mb)
+
+Target Column for Total/Average Time (e.g., total_time_sec)
+
+Example Recipe:
+
+plaintext
+Copy code
+aggregate-stats :data_transfer_size :response_time total_size_mb total_time_sec
+Expected Output:
+
+A single row with:
+
+total_size_mb: Total size in MB
+
+total_time_sec: Total time in seconds
+
+Test Coverage
+Unit tests are added for ByteSize and TimeDuration parsers.
+
+Unit test added: AggregateStatsTest.java

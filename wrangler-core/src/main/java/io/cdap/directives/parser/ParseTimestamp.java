@@ -146,7 +146,7 @@ public class ParseTimestamp implements Directive, Lineage {
                                  "representing long.", column);
     }
 
-    throw new ErrorRowException(NAME, errorMsg, 2);
+    throw new ErrorRowException(NAME + ": " + errorMsg, 2, false);
   }
 
   private ZonedDateTime getZonedDateTime(long ts, TimeUnit unit, ZoneId zoneId) {

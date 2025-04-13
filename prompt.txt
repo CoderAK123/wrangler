@@ -1,0 +1,21 @@
+
+✅ **Action:** Open `README.md`, scroll to the bottom, paste this, and save.
+
+---
+
+## 🟢 Step 2: Create `prompts.txt`
+
+> 📄 Path:  
+> `wrangler/prompts.txt`
+
+### ✍️ Add the following contents:
+
+```txt
+Prompts and AI Tools Usage for Wrangler Assignment:
+
+- Prompt: How to integrate custom tokens in ANTLR grammar (ByteSize, TimeDuration)
+- Prompt: How to regenerate ANTLR parser files after grammar modification
+- Prompt: How to write unit tests for custom token parsers (ByteSizeTest, TimeDurationTest)
+- Prompt: Assistance with AggregateStats directive logic and implementation
+- Prompt: Resolving Maven build errors and Checkstyle violations
+- Prompt: Final project clean-up and GitHub readiness checklist

@@ -156,12 +156,12 @@ public class ParseProtobuf implements Directive, Lineage {
             byte[] bytes = (byte[]) object;
             results.addAll(decoder.decode(bytes));
           } else {
-            throw new ErrorRowException(NAME, "Column " + column + " should be of type 'byte array'", 1);
+            throw new ErrorRowException(NAME + ": " + "Column " + column + " should be of type 'byte array'", 1);
           }
         }
       }
     } catch (DecoderException e) {
-      throw new ErrorRowException(NAME, "Issue decoding Protobuf record. Check schema version '"
+      throw new ErrorRowException(NAME + ": " + "Issue decoding Protobuf record. Check schema version '"
         + (version == -1 ? "latest" : version) + "'. " + e.getMessage(), 2);
     }
     return results;

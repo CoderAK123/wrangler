@@ -14,61 +14,107 @@
  * the License.
  */
 
-package io.cdap.wrangler.api;
+ package io.cdap.wrangler.api;
 
-/**
- * Exception throw when the record needs to emitted to error collector.
- */
-public class ErrorRowException extends Exception {
-  // Message as to why the record errored.
-  private String message;
+ /**
+  * Exception thrown when a record needs to be emitted to the error collector.
+  * Contains error details including message, code, and display preferences.
+  */
+ public class ErrorRowException extends Exception {
+   /** Error code associated with this exception. */
+   private final int code;
+ 
+   /** Flag indicating if error should be shown in wrangler. */
+   private final boolean showInWrangler;
+ 
+   /**
+    * Constructs an ErrorRowException with name, message and code.
+    *
+    * @param name the directive name
+    * @param message the descriptive error message
+    * @param code the numeric error code
+    */
+   public ErrorRowException(final String name, final String message, final int code) {
+     this(name + ": " + message, code, false);
+   }
 
-  // Code associated with the error message.
-  private int code;
+   /**
+    * Constructs an ErrorRowException with name, message, code and cause.
+    *
+    * @param name the directive name
+    * @param message the descriptive error message
+    * @param code the numeric error code
+    * @param cause the underlying cause
+    */
+   public ErrorRowException(final String name, final String message, final int code, final Throwable cause) {
+     this(name + ": " + message, code, false, cause);
+   }
 
-  private boolean showInWrangler;
+   /**
+    * Constructs an ErrorRowException with name, message and code (backward compatibility).
+    *
+    * @param name the directive name
+    * @param message the descriptive error message
+    * @param code the numeric error code
+    * @deprecated Use {@link #ErrorRowException(String, String, int)} instead
+    */
+   @Deprecated
+   public ErrorRowException(final String name, final String message, final int code, final boolean showInWrangler) {
+     this(name + ": " + message, code, showInWrangler);
+   }
 
-  public ErrorRowException(String message, int code, boolean showInWrangler) {
-    this(message, code, showInWrangler, null);
-  }
-
-  public ErrorRowException(String message, int code, boolean showInWrangler, Throwable cause) {
-    super(message, cause);
-    this.message = message;
-    this.code = code;
-    this.showInWrangler = showInWrangler;
-  }
-
-  public ErrorRowException(String message, int code) {
-    this(message, code, false);
-  }
-
-  public ErrorRowException(String directiveName, String errorMessage, int code) {
-    this(directiveName, errorMessage, code, null);
-  }
-
-  public ErrorRowException(String directiveName, String errorMessage, int code, Throwable cause) {
-    this(String.format("%s (ecode: %d, directive: %s)", errorMessage, code, directiveName), code, false, cause);
-  }
-
-  /**
-   * @return Message as why the record errored.
-   */
-  public String getMessage() {
-    return message;
-  }
-
-  /**
-   * @return code related to the message.
-   */
-  public int getCode() {
-    return code;
-  }
-
-  /**
-   * @return Flag indicating whether this record should prevent further wrangling.
-   */
-  public boolean isShownInWrangler() {
-    return showInWrangler;
-  }
-}
+   /**
+    * Constructs an ErrorRowException with message and code.
+    *
+    * @param message the descriptive error message
+    * @param code the numeric error code
+    */
+   public ErrorRowException(final String message, final int code) {
+     this(message, code, false);
+   }
+ 
+   /**
+    * Constructs an ErrorRowException with message, code and wrangler flag.
+    *
+    * @param message the descriptive error message
+    * @param code the numeric error code
+    * @param showInWrangler whether to show in wrangler UI
+    */
+   public ErrorRowException(final String message, final int code,
+                           final boolean showInWrangler) {
+     this(message, code, showInWrangler, null);
+   }
+ 
+   /**
+    * Constructs an ErrorRowException with message, code, wrangler flag and cause.
+    *
+    * @param message the descriptive error message
+    * @param code the numeric error code
+    * @param showInWrangler whether to show in wrangler UI
+    * @param cause the underlying cause of this exception
+    */
+   public ErrorRowException(final String message, final int code,
+                           final boolean showInWrangler, final Throwable cause) {
+     super(message, cause);
+     this.code = code;
+     this.showInWrangler = showInWrangler;
+   }
+ 
+   /**
+    * Returns the error code associated with this exception.
+    *
+    * @return the numeric error code
+    */
+   public final int getCode() {
+     return code;
+   }
+ 
+   /**
+    * Indicates whether this error should be shown in the wrangler UI.
+    *
+    * @return true if should be shown in wrangler, false otherwise
+    */
+   public final boolean isShownInWrangler() { 
+     return showInWrangler;
+   }
+ }

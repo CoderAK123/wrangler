@@ -169,13 +169,13 @@ public class ParseAvro implements Directive, Lineage {
             results.addAll(decoder.decode(bytes));
           } else {
             throw new ErrorRowException(
-              NAME, "Column " + column + " should be of type 'String' or 'byte array'.", 1);
+              NAME + ": " + "Column " + column + " should be of type 'String' or 'byte array'.", 1, false);
           }
         }
       }
     } catch (DecoderException e) {
-      throw new ErrorRowException(NAME, "Issue decoding Avro record. Check schema version '"
-        + (version == -1 ? "latest" : version) + "'. " + e.getMessage(), 2);
+      throw new ErrorRowException(NAME + ": " + "Issue decoding Avro record. Check schema version '"
+        + (version == -1 ? "latest" : version) + "'. " + e.getMessage(), 2, false, e);
     }
     return results;
   }

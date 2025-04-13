@@ -125,7 +125,7 @@ public class SendToError implements Directive, Lineage {
           if (message == null) {
             message = condition;
           }
-          throw new ErrorRowException(NAME, message, 1);
+          throw new ErrorRowException(NAME + ": " + message, 1, false);
         }
       } catch (ELException e) {
         throw new DirectiveExecutionException(NAME, e.getMessage(), e);

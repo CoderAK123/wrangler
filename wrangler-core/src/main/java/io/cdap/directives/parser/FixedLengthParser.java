@@ -109,9 +109,10 @@ public final class FixedLengthParser implements Directive, Lineage {
           // If the recordLength length doesn't match the string length.
           if (length < recordLength) {
             throw new ErrorRowException(
-              NAME, String.format("Column '%s' contains a value with fewer characters than the specified length " +
-                                    "of row. Expected at least %d characters but found %s characters.",
-                                  col, recordLength, length), 2);
+                NAME + ": " + String.format(
+                    "Column '%s' contains a value with fewer characters than the specified length of row. " +
+                    "Expected at least %d characters but found %s characters.",
+                    col, recordLength, length), 2, false);
           }
 
           int index = 1;

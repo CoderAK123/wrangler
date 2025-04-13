@@ -104,12 +104,13 @@ public class ParseSimpleDate implements Directive, Lineage {
             row.setValue(idx, zonedDateTime);
           } catch (ParseException e) {
             throw new ErrorRowException(
-              NAME, String.format("Failed to parse '%s' with pattern '%s'", object, formatter.toPattern()), 1);
+              NAME + ": " + String.format("Failed to parse '%s' with pattern '%s'", object, formatter.toPattern()), 
+              1, false);
           }
         } else {
           throw new ErrorRowException(
-            NAME, String.format("Column '%s' is of invalid type '%s'. It should be of type 'String'.",
-                                column, object.getClass().getSimpleName()), 2);
+            NAME + ": " + String.format("Column '%s' is of invalid type '%s'. It should be of type 'String'.",
+                                column, object.getClass().getSimpleName()), 2, false);
         }
       }
     }

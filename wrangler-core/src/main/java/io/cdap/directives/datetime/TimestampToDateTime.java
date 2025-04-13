@@ -73,8 +73,9 @@ public class TimestampToDateTime implements Directive, Lineage {
       }
 
       if (!(value instanceof ZonedDateTime)) {
-        throw new ErrorRowException(NAME, String.format("Value %s for column %s expected to be timestamp but found %s",
-                                                        value.toString(), column, value.getClass().getSimpleName()), 2);
+        throw new ErrorRowException(
+            NAME + ": " + String.format("Value %s for column %s expected to be timestamp but found %s",
+            value.toString(), column, value.getClass().getSimpleName()), 2, false);
       }
 
       ZonedDateTime timestamp = (ZonedDateTime) value;
